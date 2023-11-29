@@ -24,7 +24,7 @@ public class ABTestController {
     @GetMapping("/get_variant/{userId}")
     public ResponseEntity<String> getVariant(@PathVariable("userId") String userId) {
         if (!rateLimiter.allowRequest()) {
-            return ResponseEntity.status(429).body("Too many requests");
+            return ResponseEntity.status(429).body("Too Many Requests");
         }
         return ResponseEntity.ok(abTestService.assignVariant(userId));
     }
