@@ -12,13 +12,11 @@ public class ABTestService {
     public static double g2 = 0.3;
     public static double g3 = 0.4;
 
-    public static String salt = "W1";
-
     public String assignVariant(String userId) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
-            byte[] messageDigest = md.digest((userId + salt).getBytes());
+            byte[] messageDigest = md.digest((userId).getBytes());
             BigInteger no = new BigInteger(1, messageDigest);
             String hashText = no.toString(16).substring(0, 8);
             double dicision = Long.parseLong(hashText, 16) * 1.0 / 0xffffffffL;
