@@ -1,5 +1,6 @@
 package com.haiphamcoder.apisplitabtest.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -12,6 +13,7 @@ public class ABTestService {
     public static double g2 = 0.3;
     public static double g3 = 0.4;
 
+    @Cacheable(cacheNames = "ab_test")
     public String assignVariant(String userId) {
         MessageDigest md;
         try {

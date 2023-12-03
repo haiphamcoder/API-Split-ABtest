@@ -1,6 +1,7 @@
 package com.haiphamcoder.apisplitabtest.controller;
 
 import com.haiphamcoder.apisplitabtest.service.ABTestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,14 +13,11 @@ import java.time.Duration;
 @RestController
 @RequestMapping("/api/ab_test")
 public class ABTestController {
-    private final ABTestService abTestService;
+    @Autowired
+    ABTestService abTestService;
 
     private final SlidingWindowRateLimiter rateLimiter = new SlidingWindowRateLimiter(200,
             Duration.ofSeconds(1));
-
-    public ABTestController(ABTestService abTestService) {
-        this.abTestService = abTestService;
-    }
 
     @GetMapping("/get_variant/{userId}")
     public ResponseEntity<String> getVariant(@PathVariable("userId") String userId) {
